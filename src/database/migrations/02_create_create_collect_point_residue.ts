@@ -6,11 +6,13 @@ export async function up(knex: Knex) {
     table.integer('collect_point_id')
       .notNullable()
       .references('id')
-      .inTable('collect_points');
+      .inTable('collect_points')
+      .onDelete('CASCADE');
     table.integer('residue_id')
       .notNullable()
       .references('id')
-      .inTable('residues');
+      .inTable('residues')
+      .onDelete('CASCADE');
   })
 
 }

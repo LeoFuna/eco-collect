@@ -2,9 +2,16 @@ import { CollectPointService } from "@/services/CollectPointService";
 import { NextRequest, NextResponse } from "next/server";
 
 export default class CollectPointsController {
-  async index() {
+  async index(request: NextRequest) {
+    const { searchParams } = new URL(request.url);
+    const filters = {
+      uf: searchParams.get('uf') as string,
+      city: searchParams.get('city') as string,
+      residues: searchParams.get('residues')?.split(',')?.map((id) => Number(id)),
+    };
+
     const collectPointService = new CollectPointService();
-    const collectPoints = await collectPointService.index();
+    const collectPoints = await collectPointService.index(filters);
   
     return NextResponse.json({ collectPoints });
   }
@@ -18,7 +25,7 @@ export default class CollectPointsController {
     if (typeof response === 'string') {
       return NextResponse.json({ error: response }, { status: 400 });
     }
-    return NextResponse.json({ collectPoint: response });
+    return NextResponse.json({ collectPoint: response }, { status: 201 });
   }
 
   async show(request: NextRequest, { params }: { params: { id: string } }) {

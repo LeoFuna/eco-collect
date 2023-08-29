@@ -13,8 +13,16 @@ type CollectPointData = {
 }
 
 export class CollectPointService {
-  async index() {
-    const collectPoints = await knexConnection('collect_points').select('*');
+  async index({ city, uf, residues }: { city?: string, uf?: string, residues?: number[] }) {
+    const collectPoints = await knexConnection('collect_points')
+    .join('collect_point_residues', 'collect_points.id', '=', 'collect_point_residues.collect_point_id')
+    .where((builder) => {
+      city && builder.where('city', city);
+      uf && builder.where('uf', uf);
+      residues && builder.whereIn('collect_point_residues.residue_id', residues);
+    })
+    .distinct()
+    .select('collect_points.*');
 
     return collectPoints;
   }

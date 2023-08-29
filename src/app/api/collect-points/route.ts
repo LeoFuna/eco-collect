@@ -3,8 +3,8 @@ import { NextRequest } from "next/server";
 
 const collectPointsController = new CollectPointsController();
 
-export async function GET() {
-  return collectPointsController.index();
+export async function GET(request: NextRequest) {
+  return collectPointsController.index(request);
 }
 
 export async function POST(request: NextRequest) {

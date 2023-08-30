@@ -3,25 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: #34CB79;
+  --title-color: #322153;
+  --text-color: #6C6C80;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #F0F0F5;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-ubuntu;
+    color: var(--title-color);
+  }
+  body, input, button {
+    @apply font-roboto;
+  }
 }

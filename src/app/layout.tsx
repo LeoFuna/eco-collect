@@ -1,8 +1,17 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto, Ubuntu } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-roboto'
+});
+const ubuntu = Ubuntu({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-ubuntu'
+});
 
 export const metadata: Metadata = {
   title: 'EcoCollect',
@@ -15,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR">
+      <body className={`${ubuntu.variable} ${roboto.variable}`}>{children}</body>
     </html>
   )
 }

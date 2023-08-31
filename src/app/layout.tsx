@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto, Ubuntu } from 'next/font/google'
@@ -25,7 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${ubuntu.variable} ${roboto.variable}`}>{children}</body>
+      <body className={`${ubuntu.variable} ${roboto.variable}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }

@@ -17,6 +17,14 @@ const config: Config = {
       fontFamily: {
         roboto: ['var(--font-roboto)', ...fontFamily.sans],
         ubuntu: ['var(--font-ubuntu)', ...fontFamily.sans],
+      },
+      minWidth: {
+        '40': '40rem',
+      },
+      colors: {
+        'primary': '#34CB79',
+        'title': '#322153',
+        'text': '#6C6C80',
       }
     },
   },

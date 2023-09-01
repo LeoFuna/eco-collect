@@ -23,6 +23,7 @@ const config: Config = {
       },
       colors: {
         'primary': '#34CB79',
+        'secondary': '#2FB86E',
         'title': '#322153',
         'text': '#6C6C80',
       }

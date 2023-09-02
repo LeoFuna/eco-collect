@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+  @apply top-0 left-0 py-11 px-40 fixed flex justify-between items-center w-screen;
+}
+
+.logo {
+  @apply relative w-44 h-11;
+}
+
+.prev-button {
+  @apply flex gap-3 items-center hover:opacity-90;
+}
+
+.prev-button span {
+  @apply text-primary;
+}
+
+.prev-button strong {
+  @apply text-title;
+}

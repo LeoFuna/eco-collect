@@ -28,4 +28,7 @@ body {
   body, input, button {
     @apply font-roboto;
   }
+  header {
+    background: #F0F0F5;
+  }
 }

@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-content {
+  @apply m-40 flex w-full justify-between items-center;
+}
+
+.hero-informations {
+  @apply max-w-3xl
+}
+
+.hero-title {
+  @apply text-5xl font-extrabold break-words leading-snug
+  max-2xl:text-4xl;
+}
+
+.hero-subtitle {
+  @apply my-10 text-2xl leading-snug max-w-xl
+  max-2xl:text-xl;
+}
+
+.hero-button {
+  @apply flex items-center
+  rounded-lg w-4/6
+  text-white bg-secondary
+  hover:opacity-90
+  max-2xl:text-xs;
+}
+
+.hero-button-padding {
+  @apply p-6
+  max-2xl:p-5;
+}
+
+.hero-button div {
+  @apply hero-button-padding ;
+}
+
+.hero-button strong {
+  @apply hero-button-padding w-full bg-primary rounded-r-lg;
+}
+
+.hero-banner {
+  @apply relative w-4/6 h-full mt-36;
+}

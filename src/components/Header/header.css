@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 header {
-  @apply top-0 left-0 py-11 px-40 fixed flex justify-between items-center w-screen;
+  @apply top-0 left-0 py-11 px-40 fixed flex justify-between items-center w-screen z-20;
 }
 
 .logo {

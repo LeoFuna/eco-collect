@@ -22,9 +22,7 @@ function LocationMarker() {
         popupAnchor: [0,-15]
       })}
       position={position}
-    >
-      <Popup>You are here</Popup>
-    </Marker>
+    />
   )
 }
 

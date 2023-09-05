@@ -6,13 +6,14 @@ import { useState } from 'react';
 
 const latLngSaoPaulo = [-23.5489, -46.6388];
 
-function LocationMarker() {
+function LocationMarker({ onChange }) {
   const [position, setPosition] = useState(null);
   useMapEvents({
     click(e) {
-      setPosition([e.latlng.lat, e.latlng.lng])
+      onChange({ target: { name: 'latLng', value: [e.latlng.lat, e.latlng.lng] } });
+      setPosition([e.latlng.lat, e.latlng.lng]);
     },
-  })
+  });
 
   return position === null ? null : (
     <Marker
@@ -26,7 +27,7 @@ function LocationMarker() {
   )
 }
 
-export default function Map() {
+export default function Map({ onChange }) {
   return (
     <div className='h-96'>
       <MapContainer style={{ height: '100%', width: '100%', zIndex: 0 }} center={latLngSaoPaulo} zoom={12}>
@@ -34,7 +35,7 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker />
+        <LocationMarker onChange={onChange} />
       </MapContainer>
     </div>
   )

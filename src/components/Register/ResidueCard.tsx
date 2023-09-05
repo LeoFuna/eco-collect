@@ -1,19 +1,31 @@
 'use client'
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 type ResidueCardProps = {
+  id: number;
   name: string;
   image: string;
+  setSelectedResidues: Dispatch<SetStateAction<number[]>>;
 }
 
-export default function ResidueCard({ name, image }: ResidueCardProps) {
+export default function ResidueCard({ id, name, image, setSelectedResidues }: ResidueCardProps) {
   const [isChecked, setIsChecked] = useState(false);
+  const borderColor = isChecked ? 'border-primary' : 'border-inherit';
+
+  const handleClickCard = () => {
+    const newCheckedStatus = !isChecked;
+    setIsChecked(newCheckedStatus);
+    setSelectedResidues(prevState => {
+      if (newCheckedStatus) return [...prevState, id];
+      return prevState.filter(residueId => residueId !== id);
+    });
+  }
+
   return (
     <div
-      className={`h-40 border rounded flex flex-col justify-center items-center gap-5
-       bg-tertiary ${isChecked ? 'border-primary' : ''}`}
-      onClick={() => setIsChecked(!isChecked)}
+      className={`residue-card ${borderColor}`}
+      onClick={handleClickCard}
     >
       <div className="relative h-2/5 w-full">
         <Image src={`/${image}`} fill alt={image} />

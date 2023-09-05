@@ -1,25 +1,23 @@
-import AddressFieldset from "@/components/Register/AddressFieldset";
-import BasicDataFieldSet from "@/components/Register/BasicDataFieldset";
-import ResiduesFieldset from "@/components/Register/ResiduesFieldset";
-import ImageUploadFieldset from "@/components/Register/ImageUploadFieldset";
 import './register.css';
+import { IResidue } from "@/entities/Residue";
+import RegisterForm from "@/components/Register/RegisterForm";
 
-export default function Register() {
+const getResidues = async () => {
+  const response = await fetch('http://localhost:3000/api/residues', { cache: 'no-cache' });
+  if (!response.ok) throw new Error('Error fetching residues');
+
+  const data = await response.json();
+  return data.residues as IResidue[];
+}
+
+export default async function Register() {
+  const residues = await getResidues();
+
   return (
     <main>
-      <form>
-        <h1 className="form-title">Cadastro do ponto de coleta</h1>
-        <ImageUploadFieldset />
-
-        <BasicDataFieldSet />
-
-        <AddressFieldset />
-
-        <ResiduesFieldset />
-        <button className="submit-button" disabled>
-          Cadastrar ponto de coleta
-        </button>
-      </form>
+      <RegisterForm
+        residues={residues}
+      />
     </main>
   )
 }

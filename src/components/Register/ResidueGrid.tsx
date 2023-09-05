@@ -1,20 +1,30 @@
 import { IResidue } from "@/entities/Residue";
 import ResidueCard from "./ResidueCard";
+import { ChangeEventHandler, useEffect, useState } from "react";
 
-const getResidues = async () => {
-  const response = await fetch('http://localhost:3000/api/residues', { cache: 'no-cache' });
-  if (!response.ok) throw new Error('Error fetching residues');
-
-  const data = await response.json();
-  return data.residues as IResidue[];
+type ResidueGridProps = {
+  residues: IResidue[];
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-export default async function ResidueGrid() {
-  const residues = await getResidues();
+export default function ResidueGrid({ residues, onChange }: ResidueGridProps) {
+  const [selectedResidues, setSelectedResidues] = useState<number[]>([]);
+
+  useEffect(() => {
+    onChange({ target: { name: 'residues', value: selectedResidues } } as any);
+  }, [selectedResidues]);
 
   return (
     <div className="grid grid-cols-3 gap-4 w-full">
-      {residues.map(residue => <ResidueCard key={residue.id} image={residue.image} name={residue.name} />)}
+      {residues.map(residue => (
+        <ResidueCard
+          key={residue.id}
+          id={residue?.id || 0}
+          image={residue.image}
+          name={residue.name}
+          setSelectedResidues={setSelectedResidues}
+        />
+      ))}
     </div>
   )
 }

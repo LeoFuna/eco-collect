@@ -31,3 +31,9 @@ form {
   bg-primary border rounded-lg text-white font-bold
   disabled:opacity-70;
 }
+
+.residue-card {
+  @apply flex flex-col justify-center items-center gap-5
+  h-40 border rounded bg-tertiary
+  hover:cursor-grab;
+}

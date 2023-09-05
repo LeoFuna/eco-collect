@@ -1,13 +1,13 @@
 'use client'
 import Leaflet from 'leaflet';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
 
 const latLngSaoPaulo = [-23.5489, -46.6388];
 
 function LocationMarker() {
-  const [position, setPosition] = useState(null)
+  const [position, setPosition] = useState(null);
   useMapEvents({
     click(e) {
       setPosition([e.latlng.lat, e.latlng.lng])

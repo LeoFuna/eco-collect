@@ -11,7 +11,7 @@ export default function FormInput({ label, inputProps, className }: FormInputPro
   return (
     <div className={`flex flex-col gap-2 py-3 ${className}`}>
       <label className={`text-sm`} htmlFor={label}>{label}</label>
-      <input {...inputProps} className={`h-14 border rounded ${inputProps.className}`} />
+      <input {...inputProps} className={`h-14 border rounded px-6 ${inputProps.className}`} />
     </div>
   )
 }

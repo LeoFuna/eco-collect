@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import FormInput from "./FormInput";
 import { ChangeEventHandler } from "react";
+import { isValidValue } from "@/utils/input.utils";
 const DynamicMap = dynamic(() => import('@/components/Map'), { ssr: false });
 
 // Utilizado nesse momento para rerenderizar o mapa e garantir que nao tenhamos o problema de já ter instancia do Map Container
@@ -9,6 +10,17 @@ const DynamicMap = dynamic(() => import('@/components/Map'), { ssr: false });
 const random = Math.ceil((Math.random() * 100));
 
 export default function AddressFieldset({ onChange }: { onChange: ChangeEventHandler<HTMLInputElement> }) {
+  const onInputChange = (event: any) => {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+
+    if (isValidValue(target.name, target.value)) {
+      onChange(event);
+      return;
+    }
+    event.target.value = value.slice(0, -1);
+  }
+
   return (
     <fieldset>
       <div className="fieldset-title-div">
@@ -23,7 +35,7 @@ export default function AddressFieldset({ onChange }: { onChange: ChangeEventHan
             type: 'text',
             "aria-label": 'number',
             name: 'number',
-            onChange,
+            onChange: onInputChange,
           }}
           className="w-40"
         />
@@ -33,7 +45,7 @@ export default function AddressFieldset({ onChange }: { onChange: ChangeEventHan
             type: 'text',
             "aria-label": 'city',
             name: 'city',
-            onChange,
+            onChange: onInputChange,
           }}
           className="w-full"
         />
@@ -43,8 +55,8 @@ export default function AddressFieldset({ onChange }: { onChange: ChangeEventHan
         inputProps={{
           type: 'text',
           "aria-label": 'state',
-          name: 'state',
-          onChange,
+          name: 'uf',
+          onChange: onInputChange,
         }}
         className="w-96"
       />

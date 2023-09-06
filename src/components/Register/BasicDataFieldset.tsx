@@ -1,9 +1,20 @@
 'use client';
-
 import { ChangeEventHandler } from "react";
 import FormInput from "./FormInput";
+import { isValidValue } from "@/utils/input.utils";
 
 export default function BasicDataFieldSet({ onChange }: { onChange: ChangeEventHandler<HTMLInputElement> }) {
+
+  const onInputChange = (event: any) => {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+
+    if (isValidValue(target.name, target.value)) {
+      onChange(event);
+      return;
+    }
+    event.target.value = value.slice(0, -1);
+  }
 
   return (
     <fieldset>
@@ -14,7 +25,7 @@ export default function BasicDataFieldSet({ onChange }: { onChange: ChangeEventH
           type: 'text',
           "aria-label":'Collect point name',
           name: 'name',
-          onChange,
+          onChange: onInputChange,
         }}
       />
       <FormInput
@@ -23,7 +34,7 @@ export default function BasicDataFieldSet({ onChange }: { onChange: ChangeEventH
           type: 'text',
           "aria-label": 'Email',
           name: 'email',
-          onChange,
+          onChange: onInputChange,
         }}
       />
       <FormInput
@@ -32,7 +43,7 @@ export default function BasicDataFieldSet({ onChange }: { onChange: ChangeEventH
           type: 'text',
           "aria-label": 'Whatsapp',
           name: 'whatsapp',
-          onChange,
+          onChange: onInputChange,
         }}
         className="w-3/6"
       />

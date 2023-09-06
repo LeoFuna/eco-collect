@@ -1,4 +1,4 @@
-interface ICollectPoint {
+export interface ICollectPoint {
   id?: number;
   image?: string;
   name: string;
@@ -8,4 +8,8 @@ interface ICollectPoint {
   longitude: number;
   city: string;
   uf: string;
+}
+
+export interface ICollectPointToCreate extends ICollectPoint {
+  residues: number[];
 }

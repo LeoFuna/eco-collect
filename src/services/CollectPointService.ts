@@ -1,16 +1,5 @@
 import knexConnection from "@/database/connection";
-
-type CollectPointData = {
-  image: string,
-  name: string,
-  email: string,
-  whatsapp: number,
-  latitude: number,
-  longitude: number,
-  city: string,
-  uf: string,
-  residues: number[]
-}
+import { ICollectPointToCreate } from "@/entities/CollectPoint";
 
 export class CollectPointService {
   async index({ city, uf, residues }: { city?: string, uf?: string, residues?: number[] }) {
@@ -26,7 +15,7 @@ export class CollectPointService {
 
     return collectPoints;
   }
-  async create(body: CollectPointData) {
+  async create(body: ICollectPointToCreate) {
     const { residues, ...bodyWithoutResidues } = body;
     const trx = await knexConnection.transaction();
     try {

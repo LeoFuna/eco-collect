@@ -5,6 +5,7 @@ import BasicDataFieldSet from "./BasicDataFieldset";
 import ImageUploadFieldset from "./ImageUploadFieldset";
 import ResiduesFieldset from "./ResiduesFieldset";
 import { IResidue } from "@/entities/Residue";
+import { ICollectPointToCreate } from "@/entities/CollectPoint";
 
 type formData = {
   name?: string;
@@ -17,28 +18,29 @@ type formData = {
   residues?: number[];
 }
 
-interface ICollectPointToCreate extends ICollectPoint {
-  residues: number[];
-}
-
 export default function RegisterForm({ residues }: { residues: IResidue[] }) {
   const [formData, setFormData] = useState<formData>({});
-  const onSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const onSubmit: MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
     const collectPointToCreate: ICollectPointToCreate = {
       name: formData?.name || '',
       email: formData?.email ||  '',
       whatsapp: formData?.whatsapp || '',
-      image: formData?.image,
+      image: formData?.image || 'imagem',
       uf: formData?.uf || '',
       city: formData?.city || '',
       latitude: formData?.latLng ? formData?.latLng[0] : 0,
       longitude: formData?.latLng ? formData?.latLng[1] : 0,
       residues: formData?.residues || []
     }
-    //Aqui faremos nosso POST para criar ponto de coleta
-    console.log(collectPointToCreate);
+
+    const response = await fetch('http://localhost:3000/api/collect-points', {
+        method: 'POST',
+        body: JSON.stringify(collectPointToCreate),
+      }).then(response => response.json());
+    //TO DO: Create a snackbar component to show error message
+    if (response?.error) alert('Erro ao cadastrar ponto de coleta');
   }
 
   const onChangeInput = (event: any) => {

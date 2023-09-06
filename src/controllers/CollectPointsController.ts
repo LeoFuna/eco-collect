@@ -1,4 +1,6 @@
+import { ICollectPointToCreate } from "@/entities/CollectPoint";
 import { CollectPointService } from "@/services/CollectPointService";
+import { isValidCreateCollectPointData } from "@/validations/collect-point.validations";
 import { NextRequest, NextResponse } from "next/server";
 
 export default class CollectPointsController {
@@ -16,12 +18,13 @@ export default class CollectPointsController {
     return NextResponse.json({ collectPoints });
   }
   async create(request: NextRequest) {
-    const body = await request.json();
-    if (!Object.keys(body).length) return NextResponse.json({ error: 'Invalid body' }, { status: 400 });
-  
+    const body: ICollectPointToCreate = await request.json();
+
+    if (!isValidCreateCollectPointData(body)) return NextResponse.json({ error: 'Form data is invalid!' }, { status: 400 });
+
     const collectPointService = new CollectPointService();
     const response = await collectPointService.create(body);
-  
+
     if (typeof response === 'string') {
       return NextResponse.json({ error: response }, { status: 400 });
     }

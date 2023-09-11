@@ -19,8 +19,8 @@ function LocationMarker({ onChange }) {
     <Marker
       icon={ new Leaflet.Icon({
         iconUrl: 'https://cdn-icons-png.flaticon.com/512/3082/3082383.png',
-        iconSize: [30,30],
-        popupAnchor: [0,-15]
+        iconSize: [40,40],
+        popupAnchor: [0,-15],
       })}
       position={position}
     />

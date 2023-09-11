@@ -31,7 +31,7 @@ export default function BasicDataFieldSet({ onChange }: { onChange: ChangeEventH
       <FormInput
         label="E-mail"
         inputProps={{
-          type: 'text',
+          type: 'email',
           "aria-label": 'Email',
           name: 'email',
           onChange: onInputChange,

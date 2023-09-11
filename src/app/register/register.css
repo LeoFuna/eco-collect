@@ -37,3 +37,12 @@ form {
   h-40 border rounded bg-tertiary
   hover:cursor-grab;
 }
+
+.upload-box {
+  @apply relative rounded-md border border-primary border-dashed
+  h-full flex flex-col justify-center items-center gap-4;
+}
+
+.upload-fieldset {
+  @apply w-full bg-tertiary h-80 p-8 my-16 rounded-md;
+}

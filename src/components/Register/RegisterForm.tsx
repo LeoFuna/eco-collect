@@ -27,7 +27,7 @@ export default function RegisterForm({ residues }: { residues: IResidue[] }) {
       name: formData?.name || '',
       email: formData?.email ||  '',
       whatsapp: formData?.whatsapp || '',
-      image: formData?.image || 'imagem',
+      image: formData?.image || '',
       uf: formData?.uf || '',
       city: formData?.city || '',
       latitude: formData?.latLng ? formData?.latLng[0] : 0,
@@ -52,7 +52,7 @@ export default function RegisterForm({ residues }: { residues: IResidue[] }) {
   return (
     <form>
       <h1 className="form-title">Cadastro do ponto de coleta</h1>
-      <ImageUploadFieldset />
+      <ImageUploadFieldset onChange={onChangeInput} />
 
       <BasicDataFieldSet onChange={onChangeInput} />
 

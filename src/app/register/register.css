@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+.main-register {
   @apply px-96 py-40 flex justify-center w-screen;
 }
 

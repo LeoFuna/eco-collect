@@ -14,7 +14,7 @@ export default async function Register() {
   const residues = await getResidues();
 
   return (
-    <main>
+    <main className='main-register'>
       <RegisterForm
         residues={residues}
       />

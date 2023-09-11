@@ -6,6 +6,7 @@ import ImageUploadFieldset from "./ImageUploadFieldset";
 import ResiduesFieldset from "./ResiduesFieldset";
 import { IResidue } from "@/entities/Residue";
 import { ICollectPointToCreate } from "@/entities/CollectPoint";
+import SuccessNotification from "./SuccessNotification";
 
 type formData = {
   name?: string;
@@ -20,6 +21,7 @@ type formData = {
 
 export default function RegisterForm({ residues }: { residues: IResidue[] }) {
   const [formData, setFormData] = useState<formData>({});
+  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
   const onSubmit: MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
@@ -40,7 +42,8 @@ export default function RegisterForm({ residues }: { residues: IResidue[] }) {
         body: JSON.stringify(collectPointToCreate),
       }).then(response => response.json());
     //TO DO: Create a snackbar component to show error message
-    if (response?.error) alert('Erro ao cadastrar ponto de coleta');
+    if (response?.error) return alert('Erro ao cadastrar ponto de coleta');
+    setOpenBackdrop(true);
   }
 
   const onChangeInput = (event: any) => {
@@ -50,18 +53,21 @@ export default function RegisterForm({ residues }: { residues: IResidue[] }) {
   }
 
   return (
-    <form>
-      <h1 className="form-title">Cadastro do ponto de coleta</h1>
-      <ImageUploadFieldset onChange={onChangeInput} />
+    <>
+      <form>
+        <h1 className="form-title">Cadastro do ponto de coleta</h1>
+        <ImageUploadFieldset onChange={onChangeInput} />
 
-      <BasicDataFieldSet onChange={onChangeInput} />
+        <BasicDataFieldSet onChange={onChangeInput} />
 
-      <AddressFieldset onChange={onChangeInput} />
+        <AddressFieldset onChange={onChangeInput} />
 
-      <ResiduesFieldset residues={residues} onChange={onChangeInput} />
-      <button className="submit-button" type="submit" onClick={onSubmit}>
-        Cadastrar ponto de coleta
-      </button>
-    </form>
+        <ResiduesFieldset residues={residues} onChange={onChangeInput} />
+        <button className="submit-button" type="submit" onClick={onSubmit}>
+          Cadastrar ponto de coleta
+        </button>
+      </form>
+      {openBackdrop && <SuccessNotification />}
+    </>
   )
 }

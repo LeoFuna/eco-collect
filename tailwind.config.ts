@@ -27,7 +27,16 @@ const config: Config = {
         'tertiary': '#E1FAEC',
         'title': '#322153',
         'text': '#6C6C80',
-      }
+      },
+      animation: {
+        fade: 'fadeIn 0.3s ease-in',
+      },
+      keyframes: (theme) => ({
+        fadeIn: {
+          '0%': { opacity: '0.8' },
+          '100%': { opacity: '0.95' },
+        },
+      }),
     },
   },
   plugins: [],

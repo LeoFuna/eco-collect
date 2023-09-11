@@ -4,7 +4,7 @@ export async function up(knex: Knex) {
   // Seria responsavel por rodar a migration
   return knex.schema.createTable('collect_points', table => {
     table.increments('id').primary();
-    table.string('image').notNullable();
+    table.string('image');
     table.string('name').notNullable();
     table.string('email').notNullable();
     table.string('whatsapp').notNullable();

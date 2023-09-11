@@ -13,7 +13,7 @@ export default function Header({ showBackButton = false }) {
           <Image src='/logo.svg' fill priority alt="Ecoleta logo" />
         </div>
         { showBackButton && (
-        <button onClick={router.back} className="prev-button">
+        <button onClick={() => router.push('/')} className="prev-button">
           <span><FiArrowLeft size={20} /></span>
           <strong>Voltar para home</strong>
         </button>

@@ -11,3 +11,4 @@
 - [x] Criar validaçoes básicas para os campos
 - [x] Criar página de confirmaçao de cadastro realizado
 - [x] Criar popup para informar erro de cadastro.
+- [ ] Fazer a página de cadastro de ponto responsiva.
